@@ -1,4 +1,3 @@
-<!-- codigo nuevo -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -88,10 +87,10 @@
 
             if (orden.includes("hora")) {
                 var now = new Date();
-                var hora = now.getHours() + ":" + now.getMinutes();
+                var hora = now.getHours() + ":" + (now.getMinutes() < 10 ? '0' : '') + now.getMinutes();
                 resultado.textContent = "Son las " + hora;
             } 
-            else if(orden.includes("hola")){
+            else if (orden.includes("hola")) {
                 resultado.textContent = "Hola, muy buenos días.";
             } 
             else if (orden.includes("jugar")) {
@@ -116,12 +115,14 @@
                     return; // Si el usuario cancela, salir de la función
                 }
                 var valor1 = parseFloat(prompt("Ingrese el primer valor:"));
-                if (valor1 === null) {
-                    return; // Si el usuario cancela, salir de la función
+                if (isNaN(valor1)) {
+                    resultado.textContent = "Valor inválido para el primer valor.";
+                    return;
                 }
                 var valor2 = parseFloat(prompt("Ingrese el segundo valor:"));
-                if (valor2 === null) {
-                    return; // Si el usuario cancela, salir de la función
+                if (isNaN(valor2)) {
+                    resultado.textContent = "Valor inválido para el segundo valor.";
+                    return;
                 }
                 var resultadoCalculadora;
                 switch (operador) {
@@ -176,4 +177,5 @@
     </script>
 </body>
 </html>
+
 
