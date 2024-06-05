@@ -89,7 +89,10 @@
                 var now = new Date();
                 var hora = now.getHours() + ":" + now.getMinutes();
                 resultado.textContent = "Son las " + hora;
-            } else if (orden.includes("jugar")) {
+            } 
+            else if(orden.includes("hola")){
+                resultado.textContent = "Hola, muy buenos dias."
+            else if (orden.includes("jugar")) {
                 var numeroAzar = Math.floor(Math.random() * 20) + 1;
                 while (true) {
                     var numero = prompt("Ingrese un número del 1 al 20:");
