@@ -93,7 +93,7 @@
         function mostrarAyuda() {
             alert("Funciones disponibles:\n\n" +
                   "- Preguntar la hora: 'hora'\n" +
-                  "- Saludar: 'hola'\n" +
+                  "- Saludar: 'hola o buenas'\n" +
                   "- Jugar a adivinar un número: 'jugar'\n" +
                   "- Usar la calculadora: 'calculadora'\n" +
                   "- Gestionar tareas: 'tareas agrega [tarea]', 'tareas quita [tarea]', 'tareas muestrame'\n" +
@@ -110,7 +110,7 @@
                 var hora = now.getHours() + ":" + (now.getMinutes() < 10 ? '0' : '') + now.getMinutes();
                 resultado.textContent = "Son las " + hora;
             } 
-            else if (orden.includes("hola")) {
+            else if (orden.includes("hola") || orden.includes("buenas") {
                 var now = new Date();
                 var hora = now.getHours();
                 if (hora < 12) {
