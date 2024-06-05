@@ -40,6 +40,7 @@
             border-radius: 5px;
             font-size: 1em;
             cursor: pointer;
+            margin: 5px;
         }
         
         button:hover {
@@ -57,13 +58,20 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
     </style>
 </head>
 <body>
-    <button onclick="mostrarAyuda()">Ayuda</button>
     <h1>Asistente Virtual</h1>
     <input type="text" id="inputOrden" placeholder="¿Qué necesita?">
-    <button onclick="procesarOrden()">Enviar</button>
+    <div class="button-container">
+        <button onclick="procesarOrden()">Enviar</button>
+        <button onclick="mostrarAyuda()">Ayuda</button>
+    </div>
     <div id="resultado"></div>
 
     <script>
@@ -103,8 +111,18 @@
                 resultado.textContent = "Son las " + hora;
             } 
             else if (orden.includes("hola")) {
-                resultado.textContent = "Hola, ¿en que puedo ayudarte?.";
-            } 
+                var now = new Date();
+                var hora = now.getHours();
+                if (hora < 12) {
+                    resultado.textContent = "Hola, buenos días";
+                }
+                else if (hora >= 12 && hora < 19) {
+                    resultado.textContent = "Hola, buenas tardes";
+                }
+                else if (hora >= 19) {
+                    resultado.textContent = "Hola, buenas noches";
+                }
+            }
             else if (orden.includes("jugar")) {
                 var numeroAzar = Math.floor(Math.random() * 20) + 1;
                 while (true) {
@@ -115,7 +133,7 @@
                     if (parseInt(numero) === numeroAzar) {
                         resultado.textContent = "¡Felicitaciones!";
                         break; // Si el usuario adivina, salir del bucle
-                    } else if (parseInt(numero) > 15) {
+                    } else if (parseInt(numero) > 20) {
                         resultado.textContent = "El número está fuera del rango permitido.";
                     } else {
                         resultado.textContent = "Intente de nuevo.";
@@ -189,6 +207,7 @@
     </script>
 </body>
 </html>
+
 
 
 
