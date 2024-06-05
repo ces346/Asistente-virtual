@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente Virtual</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        #resultado {
+            margin-top: 20px;
+            padding: 20px;
+            width: 320px;
+            text-align: center;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Asistente Virtual</h1>
+    <input type="text" id="inputOrden" placeholder="¿Qué necesita?">
+    <button onclick="procesarOrden()">Enviar</button>
+    <div id="resultado"></div>
+
+    <script>
+        var chistes = [
+            "¿Cómo se despiden los químicos? Ácido un placer",
+            "¿Cómo se llama el primo vegano de Bruce Lee? Broco Lee",
+            "¿Cómo se llama el campeón de buceo japonés? Tokofondo",
+            "-¿Es este el club de los vagos? +Sí, es aquí. -Pues que me entren, por favor",
+            "-Soy un tipo saludable. +¿Te gusta comer bien? -No, pero siempre me saludan",
+            "¿Dónde caga Batman? En el Bat-er",
+            "¿Cómo se dice no en Sudáfrica? Mopongo",
+            "En una entrevista de trabajo: -En su currículum pone que habla inglés. +Oui. -Eso es francés, señor. +Pues apúntemelo, también",
+            "¿Cómo se llama hacer dieta en chino? Kita Kilito",
+            "Robinson Crusó... y lo atropellaron"
+        ];
+
+        var listaTareas = [];
+
+        function procesarOrden() {
+            var orden = document.getElementById("inputOrden").value.toLowerCase();
+            var resultado = document.getElementById("resultado");
+
+            if (orden.includes("hora")) {
+                var now = new Date();
+                var hora = now.getHours() + ":" + now.getMinutes();
+                resultado.textContent = "Son las " + hora;
+            } else if (orden.includes("jugar")) {
+                var numeroAzar = Math.floor(Math.random() * 20) + 1;
+                while (true) {
+                    var numero = prompt("Ingrese un número del 1 al 20:");
+                    if (numero === null) {
+                        break; // Si el usuario cancela, salir del bucle
+                    }
+                    if (parseInt(numero) === numeroAzar) {
+                        resultado.textContent = "¡Felicitaciones!";
+                        break; // Si el usuario adivina, salir del bucle
+                    } else if (parseInt(numero) > 15) {
+                        resultado.textContent = "El número está fuera del rango permitido.";
+                    } else {
+                        resultado.textContent = "Intente de nuevo.";
+                    }
+                }
+            } else if (orden.includes("calculadora")) {
+                var operador = prompt("Ingrese el operador (+, -, *, /):");
+                if (operador === null) {
+                    return; // Si el usuario cancela, salir de la función
+                }
+                var valor1 = parseFloat(prompt("Ingrese el primer valor:"));
+                if (valor1 === null) {
+                    return; // Si el usuario cancela, salir de la función
+                }
+                var valor2 = parseFloat(prompt("Ingrese el segundo valor:"));
+                if (valor2 === null) {
+                    return; // Si el usuario cancela, salir de la función
+                }
+                var resultadoCalculadora;
+                switch (operador) {
+                    case "+":
+                        resultadoCalculadora = valor1 + valor2;
+                        break;
+                    case "-":
+                        resultadoCalculadora = valor1 - valor2;
+                        break;
+                    case "*":
+                        resultadoCalculadora = valor1 * valor2;
+                        break;
+                    case "/":
+                        if (valor2 !== 0) {
+                            resultadoCalculadora = valor1 / valor2;
+                        } else {
+                            resultadoCalculadora = "Error: División por cero";
+                        }
+                        break;
+                    default:
+                        resultadoCalculadora = "Operador inválido";
+                }
+                resultado.textContent = "Resultado: " + resultadoCalculadora;
+            } else if (orden.includes("tareas")) {
+                if (orden.includes("agrega")) {
+                    var tarea = orden.split("agrega")[1].trim();
+                    listaTareas.push(tarea);
+                    resultado.textContent = "Tarea agregada: " + tarea;
+                } else if (orden.includes("quita")) {
+                    var tareaCompletada = orden.replace("quita", "").trim();
+                    var index = listaTareas.indexOf(tareaCompletada);
+                    if (index !== -1) {
+                        listaTareas.splice(index, 1);
+                        resultado.textContent = "Tarea completada y eliminada de la lista.";
+                    } else {
+                        resultado.textContent = "La tarea no está en la lista.";
+                    }
+                } else if (orden.includes("muestrame")) {
+                    resultado.textContent = "Tareas: " + listaTareas.join(", ");
+                }
+            } else if (orden.includes("chiste")) {
+                var chisteAleatorio = chistes[Math.floor(Math.random() * chistes.length)];
+                resultado.textContent = chisteAleatorio;
+            }
+             else if (orden.includes("salir")) {
+                resultado.textContent = "Saliendo...";
+                // Implementa cualquier limpieza necesaria o redireccionamiento aquí
+            } else {
+                resultado.textContent = "Perdón, no tengo esa función.";
+            }
+        }
+    </script>
+</body>
+</html>
