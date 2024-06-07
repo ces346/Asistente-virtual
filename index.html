@@ -202,9 +202,11 @@
             } else if (orden.includes("chiste")) {
                 var chisteAleatorio = chistes[Math.floor(Math.random() * chistes.length)];
                 resultado.textContent = chisteAleatorio;
-            } else if (orden.includes("salir")) {
-                resultado.textContent = "Saliendo...";
-                // Implementa cualquier limpieza necesaria o redireccionamiento aquí
+            }
+            else{
+                resultado.textContent = "Perdon, no tengo esa funcion";
+            }
+                
 
 
 
