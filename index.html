@@ -1,4 +1,4 @@
-<--comentario-->
+<!-- comentario -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -99,8 +99,9 @@
                   "- Usar la calculadora: 'calculadora'\n" +
                   "- Gestionar tareas: 'tareas agrega [tarea]', 'tareas quita [tarea]', 'tareas muestrame'\n" +
                   "- Contar un chiste: 'chiste'\n" +
-                  "- Salir: 'salir'")+
-                  "- Nota: no llame dos funciones al mismo tiempo, no funcionara";
+                  "- Salir: 'salir'\n" +
+                  "- Tema de sociales (se actualiza cada semana): 'historia'\n" +
+                  "- Nota: no llame dos funciones al mismo tiempo, no funcionará");
         }
 
         function procesarOrden() {
@@ -111,21 +112,24 @@
                 var now = new Date();
                 var hora = now.getHours() + ":" + (now.getMinutes() < 10 ? '0' : '') + now.getMinutes();
                 resultado.textContent = "Son las " + hora;
-            } 
-            else if (orden.includes("hola") || orden.includes("buenas") || orden.includes("buenos") {
+            } else if (orden.includes("historia")) {
+                resultado.textContent = "El humanismo, surgido en Europa durante el Renacimiento (siglos XIV-XVI), fue un movimiento cultural " +
+                    "que puso al ser humano en el centro de su universo, destacando su dignidad y potencial. Promovió el estudio de las culturas clásicas de Grecia y Roma, " +
+                    "fomentando el racionalismo y una ética basada en principios universales en lugar de la autoridad religiosa. Características clave incluyen el antropocentrismo, " +
+                    "el uso de la razón y el pensamiento crítico, y una educación integral que abarcara artes, ciencias y humanidades. Influyó en el arte, con figuras como Leonardo da Vinci y Miguel Ángel, " +
+                    "y en la ciencia, conduciendo a la Revolución Científica. Además, aunque muchos humanistas eran religiosos, " +
+                    "el humanismo promovió una visión más secular del mundo, contribuyendo a cuestionar la Iglesia y facilitando la Reforma Protestante.";
+            } else if (orden.includes("hola") || orden.includes("buenas") || orden.includes("buenos")) {
                 var now = new Date();
                 var hora = now.getHours();
                 if (hora < 12) {
                     resultado.textContent = "Hola, buenos días";
-                }
-                else if (hora >= 12 && hora < 19) {
+                } else if (hora >= 12 && hora < 19) {
                     resultado.textContent = "Hola, buenas tardes";
-                }
-                else if (hora >= 19) {
+                } else if (hora >= 19) {
                     resultado.textContent = "Hola, buenas noches";
                 }
-            }
-            else if (orden.includes("jugar")) {
+            } else if (orden.includes("jugar")) {
                 var numeroAzar = Math.floor(Math.random() * 20) + 1;
                 while (true) {
                     var numero = prompt("Ingrese un número del 1 al 20:");
@@ -198,17 +202,10 @@
             } else if (orden.includes("chiste")) {
                 var chisteAleatorio = chistes[Math.floor(Math.random() * chistes.length)];
                 resultado.textContent = chisteAleatorio;
-            } 
-            else if (orden.includes("salir")) {
+            } else if (orden.includes("salir")) {
                 resultado.textContent = "Saliendo...";
                 // Implementa cualquier limpieza necesaria o redireccionamiento aquí
-            } else {
-                resultado.textContent = "Perdón, no tengo esa función.";
-            }
-        }
-    </script>
-</body>
-</html>
+
 
 
 
