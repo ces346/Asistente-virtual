@@ -1,4 +1,3 @@
-<!-- comentario -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -202,10 +201,14 @@
             } else if (orden.includes("chiste")) {
                 var chisteAleatorio = chistes[Math.floor(Math.random() * chistes.length)];
                 resultado.textContent = chisteAleatorio;
+            } else {
+                resultado.textContent = "Perdón, no tengo esa función.";
             }
-            else{
-                resultado.textContent = "Perdon, no tengo esa funcion";
-            }
+        }
+    </script>
+</body>
+</html>
+
                 
 
 
