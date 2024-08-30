@@ -182,7 +182,10 @@
                     var index = listaTareas.indexOf(tareaCompletada);
                     if (index !== -1) {
                         listaTareas.splice(index, 1);
-                        resultado.textContent = "Tarea completada y eliminada de la lista.";
+                        console.log("La tarea '" + tareaCompletada + "' ha sido eliminada.");
+                    } else {
+                        console.log("La tarea '" + tareaCompletada + "' no fue encontrada.");
+                    }
                     } else {
                         resultado.textContent = "La tarea no está en la lista.";
                     }
